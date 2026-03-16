@@ -87,5 +87,3 @@ python main.py
 *   `report/`: LaTeX project documentation.
 *   `models/`: Pre-trained PyTorch weights.
 
----
-**Developed by [Niranjan7771](https://github.com/Niranjan7771)**
