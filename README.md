@@ -26,8 +26,6 @@ An advanced real-time computer vision system that integrates body pose estimatio
 *   **Math**: NumPy, SciPy (EMA Filters)
 *   **Reporting**: LaTeX
 
-##  Dashboard Showcase
-
 ##  Installation
 
 1.  **Clone the Repository**
