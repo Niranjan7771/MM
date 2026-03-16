@@ -28,15 +28,6 @@ An advanced real-time computer vision system that integrates body pose estimatio
 
 ##  Dashboard Showcase
 
-### Camera Analysis Page
-![Camera Analysis](screenshots/camera_page.png)
-
-### Sign Language Translation
-![Sign Language](screenshots/sign_language_page.png)
-
-### Gesture Controlled Game
-![Gesture Game](screenshots/game_page.png)
-
 ##  Installation
 
 1.  **Clone the Repository**

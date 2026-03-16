@@ -4,6 +4,7 @@ __pycache__/
 recordings/
 snapshots/
 results/
+screenshots/
 .ipynb_checkpoints/
 .vscode/
 .idea/
