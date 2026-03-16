@@ -1,0 +1,66 @@
+Sign Language Recognition
+
+Instead of simple gestures, detect sign language words.
+
+Pipeline:
+
+Pose estimation
+
+Extract hand landmarks
+
+Train gesture classifier
+
+Convert gesture → text
+
+Output example:
+
+Gesture detected: HELLO
+
+Advanced extension:
+
+Convert sign language → speech
+
+This combines:
+
+computer vision
+
+sequence modeling
+
+accessibility tech
+
+
+Gesture Controlled Game
+
+Make a small game controlled by body movement.
+
+Example:
+
+Jump → player jumps
+
+Lean left/right → move character
+
+Punch → attack
+
+
+
+Predict Next Motion (Advanced DL)
+
+Train a model to predict future body pose.
+
+Example:
+
+Input:
+
+last 20 frames of skeleton
+
+Output:
+
+next 5 frames prediction
+
+Models used:
+
+LSTM
+
+Transformer
+
+Graph Neural Networks

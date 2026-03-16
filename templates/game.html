@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Game | Multi-Modal Estimation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="dot"></span>
+            Multi-Modal Estimation System
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/camera">Camera Analysis</a></li>
+            <li><a href="/sign-language">Sign Language</a></li>
+            <li><a href="/game" class="active">Gesture Game</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="game-layout">
+            <!-- Game Canvas -->
+            <div>
+                <div class="game-canvas-container">
+                    <canvas id="gameCanvas" width="800" height="500"></canvas>
+                </div>
+            </div>
+
+            <!-- Game Info Panel -->
+            <div class="side-panel">
+                <div class="video-container" style="margin-bottom: 0.25rem;">
+                    <span class="video-label">CAMERA FEED</span>
+                    <img id="videoFeed" src="/video_feed" alt="Camera" style="width:100%; height:auto; display:block;">
+                </div>
+
+                <div class="panel">
+                    <h4>Score</h4>
+                    <div class="game-score" id="game-score">0</div>
+                    <div class="game-status" id="game-status">Press START to play</div>
+                </div>
+
+                <div class="panel">
+                    <h4>Body Controls</h4>
+                    <div class="panel-row">
+                        <span class="label">Action</span>
+                        <span class="value" id="game-action" style="color:var(--accent-cyan);">Idle</span>
+                    </div>
+                    <div class="panel-row">
+                        <span class="label">Lean</span>
+                        <span class="value" id="game-lean">0.00</span>
+                    </div>
+                    <div class="panel-row">
+                        <span class="label">Arms Up</span>
+                        <span class="value" id="game-arms">No</span>
+                    </div>
+                    <div class="panel-row">
+                        <span class="label">Crouching</span>
+                        <span class="value" id="game-crouch">No</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h4>Game Controls</h4>
+                    <button class="action-btn success" id="btn-start" onclick="startGame()">Start Game</button>
+                    <button class="action-btn danger" style="margin-top:0.4rem;" onclick="resetGame()">Reset</button>
+                </div>
+
+                <div class="panel">
+                    <h4>How to Play</h4>
+                    <p style="color:var(--text-dim);font-size:0.75rem;line-height:1.7;">
+                        <strong style="color:var(--accent-cyan);">Lean Left/Right</strong> - Move character<br>
+                        <strong style="color:var(--accent-green);">Raise Both Arms</strong> - Jump<br>
+                        <strong style="color:var(--accent-orange);">Crouch Down</strong> - Duck<br><br>
+                        Dodge the incoming obstacles! Score increases the longer you survive.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/game.js"></script>
+</body>
+</html>

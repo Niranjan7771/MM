@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Analysis | Multi-Modal Estimation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="dot"></span>
+            Multi-Modal Estimation System
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/camera" class="active">Camera Analysis</a></li>
+            <li><a href="/sign-language">Sign Language</a></li>
+            <li><a href="/game">Gesture Game</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="camera-layout">
+            <!-- Video Feed -->
+            <div class="video-container">
+                <span class="video-label">LIVE</span>
+                <img id="videoFeed" src="/video_feed" alt="Live Camera Feed">
+            </div>
+
+            <!-- Analytics Side Panel -->
+            <div class="side-panel">
+                <!-- Module Toggles -->
+                <div class="panel">
+                    <h4>Module Controls</h4>
+                    <div class="toggle-grid">
+                        <button class="toggle-btn active" id="btn-pose" onclick="toggle('pose')">Pose</button>
+                        <button class="toggle-btn active" id="btn-hands" onclick="toggle('hands')">Hands</button>
+                        <button class="toggle-btn active" id="btn-face" onclick="toggle('face')">Face</button>
+                        <button class="toggle-btn active" id="btn-trails" onclick="toggle('trails')">Trails</button>
+                        <button class="toggle-btn active" id="btn-graphs" onclick="toggle('graphs')">Graphs</button>
+                        <button class="toggle-btn" id="btn-seg" onclick="toggle('seg')">Bg Seg</button>
+                    </div>
+                    <div style="margin-top:0.5rem;">
+                        <button class="action-btn" onclick="snapshot()">Take Snapshot</button>
+                    </div>
+                </div>
+
+                <!-- Pose Panel -->
+                <div class="panel" id="pose-panel">
+                    <h4>Pose Analytics</h4>
+                    <div id="pose-data">
+                        <div class="panel-row">
+                            <span class="label">Confidence</span>
+                            <span class="value" id="pose-conf">--</span>
+                        </div>
+                        <div id="angles-container"></div>
+                    </div>
+                </div>
+
+                <!-- Hand Panel -->
+                <div class="panel" id="hand-panel">
+                    <h4>Hand Analytics</h4>
+                    <div id="hand-data">
+                        <span style="color:var(--text-dim);font-size:0.82rem;">No hands detected</span>
+                    </div>
+                </div>
+
+                <!-- Face Panel -->
+                <div class="panel" id="face-panel">
+                    <h4>Face Analytics</h4>
+                    <div id="face-data">
+                        <span style="color:var(--text-dim);font-size:0.82rem;">No face detected</span>
+                    </div>
+                </div>
+
+                <!-- DL Motion Prediction Panel -->
+                <div class="panel" id="prediction-panel" style="border-left: 4px solid var(--accent-purple);">
+                    <h4>Future Motion (DL)</h4>
+                    <div style="font-size:0.75rem; color:var(--text-dim); margin-bottom:0.5rem; line-height:1.4;">
+                        Predicting next 5 frames (LSTM)
+                    </div>
+                    <div class="panel-row" style="margin-bottom:0.5rem; border-bottom:1px solid var(--border-color); padding-bottom:0.5rem;">
+                        <span class="label">Live Accuracy</span>
+                        <span class="value" id="pred-accuracy">--%</span>
+                    </div>
+                    <div id="prediction-data">
+                        <span style="color:var(--text-dim);font-size:0.82rem;">Buffering sequence...</span>
+                    </div>
+                </div>
+
+                <!-- Activity -->
+                <div class="panel">
+                    <h4>Activity</h4>
+                    <div class="panel-row">
+                        <span class="label">Current</span>
+                        <span class="value" id="activity-label" style="color:var(--accent-purple);">--</span>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="panel" id="exercise-panel">
+                    <h4>Exercise Tracker</h4>
+                    <div id="exercise-data"></div>
+                    <button class="action-btn warning" style="margin-top:0.5rem;font-size:0.75rem;" onclick="resetExercise()">Reset Counters</button>
+                </div>
+
+                <!-- Symmetry -->
+                <div class="panel" id="symmetry-panel">
+                    <h4>Symmetry Analysis</h4>
+                    <div class="panel-row">
+                        <span class="label">Overall</span>
+                        <span class="value" id="sym-overall">--</span>
+                    </div>
+                    <div id="sym-pairs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/static/js/camera.js"></script>
+</body>
+</html>

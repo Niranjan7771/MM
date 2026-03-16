@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language | Multi-Modal Estimation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="dot"></span>
+            Multi-Modal Estimation System
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/camera">Camera Analysis</a></li>
+            <li><a href="/sign-language" class="active">Sign Language</a></li>
+            <li><a href="/game">Gesture Game</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="sign-layout">
+            <!-- Video Feed -->
+            <div class="video-container">
+                <span class="video-label">SIGN LANGUAGE MODE</span>
+                <img id="videoFeed" src="/video_feed" alt="Camera Feed">
+            </div>
+
+            <!-- Sign Language Panel -->
+            <div class="side-panel">
+                <div class="panel">
+                    <h4>Detected Letter</h4>
+                    <div class="detected-letter" id="detected-letter">?</div>
+                    <div class="panel-row">
+                        <span class="label">Confidence</span>
+                        <span class="value" id="sign-confidence">0%</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h4>Sentence</h4>
+                    <div class="sentence-display" id="sentence-display">_</div>
+                    <div class="sign-controls">
+                        <button class="action-btn" onclick="signSpace()">Space</button>
+                        <button class="action-btn warning" onclick="signBackspace()">Backspace</button>
+                        <button class="action-btn danger" onclick="signClear()">Clear</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h4>Supported Letters</h4>
+                    <p style="color:var(--text-secondary);font-size:0.82rem;line-height:1.8;">
+                        <span style="font-family:var(--font-mono);color:var(--accent-cyan);font-size:1.1rem;letter-spacing:0.3em;">A B C D I L O V W Y</span>
+                    </p>
+                    <p style="color:var(--text-dim);font-size:0.75rem;margin-top:0.5rem;">
+                        Hold each sign steady for ~0.5 seconds to register. Uses geometric hand landmark analysis (no ML training required).
+                    </p>
+                </div>
+
+                <div class="panel">
+                    <h4>How It Works</h4>
+                    <p style="color:var(--text-dim);font-size:0.75rem;">
+                        1. MediaPipe extracts 21 hand landmarks<br>
+                        2. Finger states (extended/curled) are computed<br>
+                        3. Distance ratios between landmarks are measured<br>
+                        4. Rule-based classifier matches geometric patterns<br>
+                        5. Temporal stability filter prevents flickering
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/sign_language.js"></script>
+</body>
+</html>

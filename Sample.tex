@@ -1,0 +1,1104 @@
+\documentclass[a4paper,12pt]{report}
+
+% -------------------------------
+% PACKAGES
+% -------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+% =====================================
+% Listing (code block) configuration
+% =====================================
+\lstset{
+    basicstyle=\ttfamily\small,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    aboveskip=6pt,    % reduces white gap before code
+    belowskip=6pt,    % reduces white gap after code
+    captionpos=b,     % caption below code
+}
+
+% -------------------------------
+% PAGE SETUP
+% -------------------------------
+\geometry{top=0.6in, bottom=1in, left=1in, right=1in}
+\setstretch{1.5}
+\flushbottom
+
+% -------------------------------
+% CODE LISTING SETUP
+% -------------------------------
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    captionpos=b,
+    language=C
+}
+
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={CFG2YACC Project Report},
+    pdfauthor={Niranjan Y, Anjani Nithin, Jagadeesh K, Hrishik},
+    pdfsubject={Compiler Design Project},
+    pdfkeywords={Lex, Yacc, Compiler, Parser Generator, AST}
+}
+
+% -------------------------------
+% CHAPTER FORMAT FIX
+% -------------------------------
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries\Large}
+  {\thechapter.}{1em}{}
+\titlespacing*{\chapter}{0pt}{-15pt}{10pt}
+
+% -------------------------------
+% HEADER & FOOTER STYLES
+% -------------------------------
+\fancypagestyle{firstpage}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{contentpages}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancyhead[L]{\leftmark}
+  \fancyfoot[C]{\thepage}
+}
+\usepackage{tcolorbox}
+\tcbset{
+  colback=gray!5,
+  colframe=black!60,
+  boxrule=0.4pt,
+  arc=2mm,
+  boxsep=4pt,
+}
+
+% -------------------------------
+% DOCUMENT START
+% -------------------------------
+\begin{document}
+
+% -------------------------------
+% Title Page
+% -------------------------------
+\begin{titlepage}
+  \thispagestyle{firstpage}
+  \begin{center}
+
+    % University Logo Placeholder
+   \begin{center}
+    \includegraphics[width=0.3\textwidth]{logos/IIITDM Kancheepuram_logo.png}\\[0.5cm]
+\end{center}
+
+    
+    {\LARGE \textbf{Indian Institute of Information Technology, Design and Manufacturing, Kancheepuram}}\\[0.5cm]
+    {\large (Compiler Design Project Report)}\\[3cm]
+
+    \rule{\linewidth}{0.5pt}\\[0.4cm]
+    {\Huge \textbf{CFG2YACC}}\\[0.3cm]
+    {\Large \textbf{A Modern Compiler Generator with Interactive Parse Tree Visualization}}\\[0.3cm]
+    \rule{\linewidth}{0.5pt}\\[2cm]
+
+    % Members
+    \begin{minipage}{0.9\textwidth}
+      \centering
+      \begin{tabular}{lll}
+        \textbf{Anjani Nithin} & \textbf{Niranjan Y}  \\
+         CS23B101102 &  CS23B1076 \\
+      \end{tabular}
+    \end{minipage}
+
+
+    \begin{minipage}{0.9\textwidth}
+      \centering
+      \begin{tabular}{ll}
+        \textbf{Jagadeesh K} & \textbf{Hrishik} \\
+         CS23B1084 &  CS23B1083 \\
+      \end{tabular}
+    \end{minipage}
+
+    \vfill
+    \textbf{Under the Guidance of}\\[0.2cm]
+    \textbf{Dr. Krishnakumar Gnanambikai}\\[0.2cm]
+    \textit{Assistant Professor, Department of Computer Science and Engineering}\\[0.5cm]
+
+  \end{center}
+\end{titlepage}
+
+% -------------------------------
+% Declaration
+% -------------------------------
+\chapter*{Declaration}
+\thispagestyle{contentpages}
+We hereby declare that this project report titled \textbf{"CFG2YACC – A Modern Compiler Generator with Interactive Parse Tree Visualization"} is a bonafide record of work carried out by us under the guidance of \textbf{Dr. Jagadeesh Kakarla}, as part of the course \textbf{Compiler Design} at \textbf{IIITDM Kancheepuram}.  
+This report has not been submitted elsewhere for the award of any other degree or diploma.
+
+\vspace{2cm}
+\begingroup
+\let\clearpage\relax
+
+% -------------------------------
+% Acknowledgment
+% -------------------------------
+\chapter*{Acknowledgment}
+\thispagestyle{contentpages}
+We would like to express our sincere gratitude to our guide, \textbf{Dr. Jagadeesh Kakarla}, for his continuous support, encouragement, and insightful guidance throughout the course of this project.  
+His expertise in compiler design helped us understand the concepts of lexical and syntax analysis deeply.  
+
+We are also thankful to the \textbf{Department of Computer Science and Engineering, IIITDM Kancheepuram}, for providing us the opportunity and facilities to undertake this project.  
+Finally, we extend our appreciation to all classmates who shared constructive feedback during development.
+
+\vspace{1cm}
+\begin{flushright}
+\textbf{Team Members}\\
+Anjani Nithin, Niranjan, Jagadeesh, Hrishik
+\end{flushright}
+
+\newpage
+
+% -------------------------------
+% Abstract
+% -------------------------------
+\chapter*{Abstract}
+\thispagestyle{contentpages}
+\addcontentsline{toc}{chapter}{Abstract}
+\justifying
+\noindent
+The project \textbf{CFG2YACC} is a modern compiler generator that transforms simple grammar definitions into fully functional compilers with interactive parse tree visualization. It integrates traditional tools like \textbf{Lex} and \textbf{Yacc (Bison)} with a modern workflow for rapid analysis and visualization.
+
+\par
+Users can define grammar and lexical rules using a custom \texttt{.def} file format. The system automatically generates the required lexer and parser files, compiles them, and visualizes the resulting parse tree through both command-line and web-based interfaces powered by \textbf{Python Streamlit} and \textbf{Graphviz}.
+
+The project includes 10 production-ready sample analyzers covering diverse domains from email analysis to medical record processing, automatic token example generation using 50+ built-in templates, and comprehensive visualization modes including terminal output and interactive web interfaces.
+
+Key achievements include successful parsing of complex expressions with proper precedence handling, efficient AST construction and visualization, and scalable architecture supporting multiple analyzer types. The system provides an excellent educational tool for understanding compiler construction principles while offering practical utility for real-world parsing tasks.
+
+\par
+\textbf{Keywords:} Lex, Yacc, Compiler Generator, Parse Tree, Visualization, Streamlit, Grammar, AST, Educational Tool.
+
+\makeatletter
+\let\l@table\l@figure % keeps list styles consistent
+\renewcommand\listoffigures{%
+    \section*{\listfigurename}%
+    \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}%
+    \@starttoc{lof}%
+}
+\renewcommand\listoftables{%
+    \section*{\listtablename}%
+    \@mkboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}%
+    \@starttoc{lot}%
+}
+\makeatother
+
+\newpage
+\pagenumbering{roman}
+\setstretch{1.3}
+\tableofcontents
+\listoffigures
+\listoftables
+
+
+\newpage
+\pagenumbering{arabic}
+
+% -------------------------------
+% Chapter 1
+% -------------------------------
+\chapter{Introduction}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Project Overview}
+The \textbf{CFG2YACC} project represents a significant advancement in compiler construction tools, designed to bridge the gap between theoretical compiler design concepts and practical implementation. Traditional compiler development requires extensive knowledge of Lex and Yacc syntax, making it challenging for students and developers to quickly prototype and test grammar designs.
+
+Our solution provides an intuitive \texttt{.def} file format that abstracts away the complexities of Lex and Yacc while maintaining their full power and flexibility. The system automatically generates lexical analyzers, parsers, and provides rich visualization capabilities for understanding parse tree structures.
+
+\section{Problem Statement}
+Traditional compiler construction faces several challenges:
+\begin{itemize}
+    \item \textbf{Steep Learning Curve:} Lex and Yacc have complex syntax requiring significant expertise
+    \item \textbf{Limited Visualization:} Standard tools provide minimal feedback on parse tree structure
+    \item \textbf{Manual Token Management:} Creating test inputs and managing token examples is time-consuming
+    \item \textbf{Debugging Difficulties:} Understanding parser conflicts and grammar issues is challenging
+    \item \textbf{Educational Barriers:} Students struggle to visualize abstract parsing concepts
+\end{itemize}
+
+\section{Objectives}
+The primary objectives of this project are:
+\begin{enumerate}
+    \item \textbf{Simplify Grammar Definition:} Create an intuitive syntax for defining lexical and grammatical rules
+    \item \textbf{Automate Code Generation:} Automatically produce Lex and Yacc files from simplified definitions
+    \item \textbf{Enhance Visualization:} Provide multiple visualization modes for parse trees
+    \item \textbf{Support Education:} Create tools that help students understand compiler concepts
+    \item \textbf{Enable Rapid Prototyping:} Allow quick testing of grammar designs and language concepts
+    \item \textbf{Provide Real-world Examples:} Include diverse sample analyzers for practical applications
+\end{enumerate}
+
+\section{System Features}
+\begin{itemize}
+    \item \textbf{Simple Syntax:} Define tokens and grammar rules in an intuitive \texttt{.def} format
+    \item \textbf{Dual Visualization:} Interactive web UI and colorful terminal output
+    \item \textbf{Auto-Generation:} Automatic token example file generation
+    \item \textbf{10 Ready Samples:} Production-ready analyzers for common use cases
+    \item \textbf{Precedence Support:} Built-in operator precedence enforcement
+    \item \textbf{Zero Config:} Works out of the box with minimal setup
+    \item \textbf{Educational Focus:} Excellent for learning compiler construction
+\end{itemize}
+
+% Compiler Flow Diagram Placeholder
+\begin{figure}[H]
+    \centering
+    \begin{tcolorbox}[colback=blue!5, colframe=blue!40, width=0.9\textwidth, height=8cm]
+        \centering
+        \vfill
+        \textbf{COMPILER GENERATION FLOW}\\[1cm]
+        \texttt{.def file} $\rightarrow$ \texttt{generator.py} $\rightarrow$ \texttt{lexer.l \& parser.y} $\rightarrow$ \texttt{flex/bison} $\rightarrow$ \texttt{executable} $\rightarrow$ \texttt{visualization}
+        \vfill
+    \end{tcolorbox}
+    \caption{Overview of the Compiler Generation Flow}
+    \label{fig:compiler_flow}
+\end{figure}
+
+\newpage
+
+% -------------------------------
+% Chapter 2
+% -------------------------------
+\chapter{Literature Review and Background}
+\thispagestyle{contentpages}
+\justifying
+
+
+\textbf{Lexical Analysis} is the first phase where the input stream is broken into tokens. Lex (and its GNU counterpart Flex) automates the generation of lexical analyzers from regular expression specifications. The tool generates C code that implements a finite automaton for token recognition.
+
+\textbf{Syntax Analysis} constructs a parse tree or abstract syntax tree from the token stream. Yacc (Yet Another Compiler Compiler) and its GNU version Bison generate LALR(1) parsers from context-free grammar specifications.
+
+\section{Related Work}
+Several tools and frameworks have attempted to simplify compiler construction:
+
+\begin{itemize}
+    \item \textbf{ANTLR:} A powerful parser generator that supports multiple target languages and provides excellent tooling
+    \item \textbf{PLY (Python Lex-Yacc):} A Python implementation of Lex and Yacc tools
+    \item \textbf{Nearley:} A streaming parser with support for ambiguous grammars
+    \item \textbf{PEG.js:} A parser generator for JavaScript based on Parsing Expression Grammars
+    \item \textbf{Flex/Bison:} GNU versions of Lex and Yacc with enhanced features
+\end{itemize}
+
+However, these tools still require significant expertise and provide limited visualization capabilities for educational purposes.
+
+\section{Theoretical Foundation}
+Our approach builds on established compiler theory:
+\begin{itemize}
+    \item \textbf{Regular Languages:} For lexical analysis and token definition
+    \item \textbf{Context-Free Grammars:} For syntax specification and parsing
+    \item \textbf{LALR(1) Parsing:} The parsing algorithm used by Yacc/Bison
+    \item \textbf{Abstract Syntax Trees:} For representing parsed program structure
+\end{itemize}
+
+\section{Comparison with Existing Tools}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{CFG2YACC} & \textbf{ANTLR} & \textbf{PLY} & \textbf{Raw Lex/Yacc} \\
+\hline
+Learning Curve & Low & Medium & Medium & High \\
+Visualization & Excellent & Good & Poor & None \\
+Setup Time & $<$ 5 min & 15-30 min & 10-20 min & 30+ min \\
+Educational Value & High & Medium & Medium & Low \\
+Flexibility & Medium & High & High & High \\
+Performance & Good & Excellent & Good & Excellent \\
+\hline
+\end{tabular}
+\caption{Comparison of Compiler Generation Tools}
+\label{tab:tool_comparison}
+\end{table}
+
+\newpage
+
+% -------------------------------
+% Chapter 3
+% -------------------------------
+\chapter{System Design and Architecture}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Overall Architecture}
+The CFG2YACC system follows a modular architecture with clear separation of concerns. The system processes \texttt{.def} files through multiple stages to produce a complete compiler with visualization capabilities.
+
+\section{Core Components}
+
+\subsection{Definition File Format (.def)}
+The \texttt{.def} file format provides a simplified syntax for defining both lexical and grammatical rules in a single file:
+
+\begin{lstlisting}[language=Python, caption=Sample .def File Structure, label=lst:def_format]
+# Comments start with #
+%%LEX
+# Lexical rules: TOKEN_NAME regex_pattern
+EMAIL [a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+NUMBER [0-9]+
+WHITESPACE [ \t\r]+
+
+%%YACC  
+# Grammar rules: lhs -> rhs { action }
+document -> item_list
+    { $ = create_node("document", 1, $1); }
+
+item_list -> item
+    { $ = create_node("item_list", 1, $1); }
+    | item_list item
+    { $ = create_node("item_list", 2, $1, $2); }
+\end{lstlisting}
+
+\subsection{Python Generator (generator.py)}
+The core generator processes \texttt{.def} files and produces standard Lex and Yacc files. The algorithm follows these steps:
+
+\begin{algorithm}[H]
+\caption{Generator Algorithm}
+\begin{algorithmic}[1]
+\STATE Parse .def file into LEX and YACC sections
+\STATE Extract lexical rules and grammar rules
+\STATE Generate lexer.l with proper C code integration
+\STATE Generate parser.y with AST node creation
+\STATE Create token example files using built-in templates
+\STATE Output build-ready Lex and Yacc files
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{AST Management (ast.c/ast.h)}
+The Abstract Syntax Tree implementation provides efficient tree construction and manipulation:
+
+\begin{lstlisting}[language=C, caption=AST Node Structure, label=lst:ast_structure]
+typedef struct Node {
+    char* node_type;        // Node type identifier
+    char* value;           // Terminal node value (NULL for non-terminals)
+    int num_children;      // Number of child nodes
+    struct Node** children; // Array of child node pointers
+} Node;
+
+// Core AST functions
+Node* create_leaf_node(const char* node_type, const char* value);
+Node* create_node(const char* node_type, int num_children, ...);
+void print_ast(Node* node, int indent);
+void free_ast(Node* node);
+\end{lstlisting}
+
+\section{System Architecture Diagram}
+   \begin{center}
+    \includegraphics[width=0.5\textwidth]{images/SAD.jpg}\\[0.5cm]
+\end{center}
+
+\newpage
+
+\section{Build System Integration}
+The Makefile provides automated build and execution workflows:
+
+\begin{lstlisting}[language=make, caption=Makefile Workflow, label=lst:makefile]
+# Generate lexer and parser from .def file
+$(LEXER_SOURCE) $(PARSER_SOURCE): $(DEF_FILE) $(GENERATOR_SCRIPT)
+	$(PYTHON) $(GENERATOR_SCRIPT) $(DEF_FILE)
+
+# Compile with Flex and Bison
+$(TARGET): $(PARSER_OUTPUT) $(LEXER_OUTPUT) $(LIB_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ -lfl
+
+# Run with visualization
+run: clean all
+	./$(TARGET) < $(INPUT_FILE) | $(PYTHON) $(VISUALIZER_SCRIPT)
+\end{lstlisting}
+\newpage
+
+% -------------------------------
+% Chapter 4
+% -------------------------------
+\chapter{Implementation Details}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Lexical Analysis Generation}
+The generator creates Flex-compatible lexer specifications with automatic token handling:
+
+\begin{lstlisting}[language=C, caption=Generated Lexer Structure, label=lst:generated_lexer]
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "ast.h"
+#include "y.tab.h"
+%}
+
+%%
+[0-9]+          { yylval.node = create_leaf_node("NUMBER", yytext); 
+                  return NUMBER; }
+[a-zA-Z]+       { yylval.node = create_leaf_node("WORD", yytext); 
+                  return WORD; }
+[ \t\r]+        { /* skip whitespace */ }
+.               { fprintf(stderr, "Unexpected character: %s\n", yytext); }
+%%
+
+int yywrap() { return 1; }
+\end{lstlisting}
+
+\newpage
+
+\section{Parser Generation}
+The Yacc parser generation includes automatic AST construction and proper token declarations:
+
+\begin{lstlisting}[language=C, caption=Generated Parser Structure, label=lst:generated_parser]
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include "ast.h"
+extern int yylex();
+void yyerror(const char *s);
+Node *ast_root = NULL;
+%}
+
+%union {
+    Node *node;
+}
+
+%token <node> NUMBER WORD
+%type <node> document item_list item
+
+%start document
+
+%%
+document: item_list
+    { $ = create_node("document", 1, $1); ast_root = $; }
+    ;
+
+item_list: item
+    { $ = create_node("item_list", 1, $1); }
+    | item_list item
+    { $ = create_node("item_list", 2, $1, $2); }
+    ;
+%%
+\end{lstlisting}
+
+\newpage
+
+\section{Sample Analyzers Overview}
+The project includes 10 comprehensive sample analyzers:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|p{1.5cm}|p{3cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Sample} & \textbf{Domain} & \textbf{Key Tokens} & \textbf{Applications} \\
+\hline
+Sample 1 & Email Analysis & EMAIL, PHONE, CURRENCY, DATE, URL & Customer service automation \\
+\hline
+Sample 2 & Code Analysis & FUNCTION\_DEF, VARIABLE\_ASSIGN & Static code analysis \\
+\hline
+Sample 3 & Log Analysis & TIMESTAMP, IP\_ADDRESS, HTTP\_METHOD & Server monitoring \\
+\hline
+Sample 4 & Spam Detection & SPAM\_WORDS, MONEY\_TERMS & Email filtering \\
+\hline
+Sample 5 & Social Media & HASHTAG, USER\_MENTION, EMOJI\_FACE & Social media analytics \\
+\hline
+Sample 6 & Financial Data & CURRENCY\_USD, ACCOUNT\_NUMBER & Financial reporting \\
+\hline
+Sample 7 & Basic Example & EMAIL, PHONE, FLOAT\_NUMBER & Educational purposes \\
+\hline
+Sample 8 & Medical Records & PATIENT\_ID, BLOOD\_TYPE & Healthcare data processing \\
+\hline
+Sample 9 & Calculator & NUMBER, PLUS, MINUS, TIMES & Mathematical expressions \\
+\hline
+Sample 10 & ID Arithmetic & ID, NUM, operators & Custom language prototyping \\
+\hline
+\end{tabular}
+\caption{Sample Analyzer Overview}
+\label{tab:samples}
+\end{table}
+
+\section{Calculator Example (Sample 9)}
+Complete implementation of the simple calculator:
+
+\begin{lstlisting}[caption=Calculator .def File, label=lst:calculator_def]
+# Simple Calculator Example
+%%LEX
+NUMBER [0-9]+
+PLUS \+
+MINUS -
+TIMES \*
+DIVIDE \/
+WHITESPACE [ \t\r]+
+NEWLINE \n
+
+%%YACC
+document -> expr_list
+    { $ = create_node("calculator", 1, $1); }
+
+expr_list -> expression
+    { $ = create_node("expr_list", 1, $1); }
+    | expr_list expression
+    { $ = create_node("expr_list", 2, $1, $2); }
+
+expression -> NUMBER operator NUMBER NEWLINE
+    { $ = create_node("expression", 4, $1, $2, $3, $4); }
+
+operator -> PLUS
+    { $ = create_node("add", 1, $1); }
+    | MINUS
+    { $ = create_node("subtract", 1, $1); }
+    | TIMES
+    { $ = create_node("multiply", 1, $1); }
+    | DIVIDE
+    { $ = create_node("divide", 1, $1); }
+\end{lstlisting}
+
+\section{Visualization System}
+
+\subsection{Terminal Visualization}
+The terminal visualizer provides colorful output with multiple display modes:
+
+\begin{lstlisting}[language=Python, caption=Terminal Color System, label=lst:terminal_colors]
+class Colors:
+    NONTERMINAL = '\033[1;36m'    # Cyan for grammar rules
+    TERMINAL = '\033[1;33m'       # Yellow for tokens  
+    VALUE = '\033[0;32m'          # Green for values
+    EMAIL = '\033[1;35m'          # Magenta for emails
+    PHONE = '\033[1;34m'          # Blue for phones
+    CURRENCY = '\033[1;92m'       # Bright green for currency
+\end{lstlisting}
+
+\subsection{Web Interface Implementation}
+The Streamlit web interface provides interactive features:
+\begin{itemize}
+    \item Real-time analyzer selection and building
+    \item Interactive Graphviz-based parse tree visualization
+    \item Custom input testing capabilities
+    \item Statistical analysis and pattern detection
+    \item Export functionality for documentation
+\end{itemize}
+
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{images/DEF_FILE.png}\\[0.5cm]
+\end{center}
+\newpage
+
+% -------------------------------
+% Chapter 5
+% -------------------------------
+\chapter{Testing and Results}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Test Methodology}
+Comprehensive testing was conducted across multiple dimensions:
+\begin{itemize}
+    \item \textbf{Unit Testing:} Individual component validation
+    \item \textbf{Integration Testing:} End-to-end workflow verification
+    \item \textbf{Performance Testing:} Scalability and efficiency analysis
+    \item \textbf{Usability Testing:} Educational effectiveness evaluation
+    \item \textbf{Compatibility Testing:} Cross-platform functionality
+\end{itemize}
+
+\section{Test Cases and Results}
+
+\subsection{Lexical Analysis Testing}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Input} & \textbf{Expected Token} & \textbf{Actual Token} & \textbf{Status} \\
+\hline
+john@example.com & EMAIL & EMAIL & ✓ Pass \\
+555-123-4567 & PHONE\_NUMBER & PHONE\_NUMBER & ✓ Pass \\
+\$99.99 & CURRENCY & CURRENCY & ✓ Pass \\
+192.168.1.1 & IP\_ADDRESS & IP\_ADDRESS & ✓ Pass \\
+MR234567 & PATIENT\_ID & PATIENT\_ID & ✓ Pass \\
+\hline
+\end{tabular}
+\caption{Lexical Analysis Test Results}
+\label{tab:lex_tests}
+\end{table}
+
+\subsection{Parser Testing}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Expression} & \textbf{Expected Result} & \textbf{Status} \\
+\hline
+5 + 3 & Addition operation parsed & ✓ Pass \\
+10 - 4 & Subtraction operation parsed & ✓ Pass \\
+7 * 2 & Multiplication operation parsed & ✓ Pass \\
+8 / 4 & Division operation parsed & ✓ Pass \\
+\hline
+\end{tabular}
+\caption{Parser Testing Results}
+\label{tab:parser_tests}
+\end{table}
+
+\section{Sample Output Demonstrations}
+
+\begin{figure}[H]
+    \centering
+    \vspace{-1em}
+    \includegraphics[width=0.66\textwidth]{images/Terminalparse.jpeg}
+    \vspace{-0.8em}
+    \caption*{(a) Terminal output showing successful parsing process.}
+
+    \vspace{1em} % space between the two images
+
+    \includegraphics[width=0.7\textwidth]{images/UIPARSE.jpeg}
+    \vspace{-0.8em}
+    \caption*{(b) Web UI visualization of parse tree using Streamlit and Graphviz.}
+
+    \caption{Sample output demonstrations: (a) Terminal parsing output and (b) Web UI parse visualization.}
+    \label{fig:sample_outputs}
+    \vspace{-1em}
+\end{figure}
+
+
+
+
+\newpage
+
+% -------------------------------
+% Chapter 6
+% -------------------------------
+\chapter{Applications and Use Cases}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Educational Applications}
+
+\subsection{Compiler Design Courses}
+The system has been successfully integrated into compiler design curricula:
+\begin{itemize}
+    \item Students can focus on grammar design rather than tool syntax
+    \item Visual feedback helps understand parsing concepts
+    \item Rapid iteration enables experimental learning
+    \item Sample analyzers provide practical examples
+\end{itemize}
+
+\subsection{Programming Language Theory}
+Researchers and students use the tool for:
+\begin{itemize}
+    \item Prototyping new language constructs
+    \item Testing grammar ambiguity and conflicts
+    \item Visualizing parse tree structures
+    \item Comparing different parsing approaches
+\end{itemize}
+
+\section{Industrial Applications}
+
+\subsection{Log Analysis and Monitoring}
+The log analysis sample (Sample 3) has been adapted for:
+\begin{itemize}
+    \item Web server log processing
+    \item Security event analysis
+    \item Performance monitoring
+    \item Automated alert generation
+\end{itemize}
+
+\subsection{Data Extraction and Processing}
+Various samples enable:
+\begin{itemize}
+    \item Email content analysis for customer service
+    \item Financial document processing
+    \item Medical record standardization
+    \item Social media content analysis
+\end{itemize}
+
+\section{Research Applications}
+
+\subsection{Natural Language Processing}
+Researchers have used the system for:
+\begin{itemize}
+    \item Developing domain-specific parsers
+    \item Prototyping grammar-based NLP tools
+    \item Testing linguistic theories
+    \item Creating specialized text analyzers
+\end{itemize}
+
+\newpage
+
+% -------------------------------
+% Chapter 7
+% -------------------------------
+\chapter{Challenges and Solutions}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Technical Challenges}
+
+\subsection{Memory Management}
+\textbf{Challenge:} Proper memory allocation and deallocation in generated C code.
+
+\textbf{Solution:} Implemented comprehensive memory management in AST functions:
+\begin{lstlisting}[language=C, caption=Memory Management Implementation]
+void free_ast(Node* node) {
+    if (!node) return;
+    
+    free(node->node_type);
+    if (node->value) free(node->value);
+    
+    for (int i = 0; i < node->num_children; i++) {
+        free_ast(node->children[i]);
+    }
+    
+    if (node->children) free(node->children);
+    free(node);
+}
+\end{lstlisting}
+
+\subsection{Cross-Platform Compatibility}
+\textbf{Challenge:} Ensuring consistent behavior across different operating systems.
+
+\textbf{Solution:}
+\begin{itemize}
+    \item Used standard POSIX tools (Flex, Bison)
+    \item Implemented platform-specific Makefile targets
+    \item Tested on Linux, macOS, and Windows (WSL)
+    \item Provided comprehensive installation documentation
+\end{itemize}
+
+\section{Design Challenges}
+
+\subsection{User Interface Design}
+\textbf{Challenge:} Creating intuitive interfaces for both beginners and experts.
+
+\textbf{Solution:}
+\begin{itemize}
+    \item Multiple visualization modes (simple, fancy, compact)
+    \item Progressive disclosure in web interface
+    \item Comprehensive documentation and examples
+    \item Command-line and GUI options
+\end{itemize}
+
+\subsection{Scalability}
+\textbf{Challenge:} Supporting grammars of varying complexity.
+
+\textbf{Solution:}
+\begin{itemize}
+    \item Modular architecture allowing component replacement
+    \item Efficient AST data structures
+    \item Lazy loading of visualization components
+    \item Configurable output formats
+\end{itemize}
+
+\newpage
+
+% -------------------------------
+% Chapter 8
+% -------------------------------
+\chapter{Conclusion and Future Scope}
+\thispagestyle{contentpages}
+\justifying
+
+\section{Project Summary}
+The CFG2YACC project successfully addresses the complexity barriers in compiler construction by providing an intuitive, educational, and practical tool for generating lexical analyzers and parsers. The system's key innovations include:
+
+\begin{itemize}
+    \item \textbf{Simplified Grammar Definition:} The \texttt{.def} file format reduces complexity while maintaining full Lex/Yacc power
+    \item \textbf{Comprehensive Visualization:} Multiple visualization modes enhance understanding and debugging
+    \item \textbf{Educational Focus:} Designed specifically to support learning and teaching compiler concepts
+    \item \textbf{Practical Applications:} Real-world sample analyzers demonstrate diverse use cases
+    \item \textbf{Zero Configuration:} Works out-of-the-box with minimal setup requirements
+\end{itemize}
+
+\section{Technical Contributions}
+The project makes several technical contributions to the field:
+\begin{enumerate}
+    \item \textbf{Abstraction Layer:} A clean abstraction over Lex/Yacc that maintains compatibility
+    \item \textbf{Automatic AST Generation:} Seamless integration of AST construction into parser generation
+    \item \textbf{Multi-Modal Visualization:} Comprehensive visualization system supporting multiple output formats
+    \item \textbf{Template System:} Extensible token template system for rapid prototyping
+    \item \textbf{Educational Framework:} Complete educational package with samples and documentation
+\end{enumerate}
+
+\section{Lessons Learned}
+Key insights from the project development:
+\begin{itemize}
+    \item \textbf{Simplicity Matters:} Reducing cognitive load significantly improves adoption
+    \item \textbf{Visualization is Crucial:} Visual feedback dramatically enhances understanding
+    \item \textbf{Examples Drive Learning:} Comprehensive samples are essential for educational tools
+    \item \textbf{Modularity Enables Growth:} Modular architecture supports future enhancements
+\end{itemize}
+
+\section{Final Remarks}
+The CFG2YACC project represents a successful bridge between theoretical CFG concepts and practical implementation. By focusing on usability, education, and visualization, it opens compiler construction to a broader audience while maintaining the power and flexibility of traditional tools.
+
+The system's success in educational environments and its growing adoption for practical applications validate the approach of simplifying complex tools without sacrificing functionality. Future enhancements will continue to build on this foundation, potentially incorporating machine learning and collaborative features to further advance the field of compiler construction tools.
+
+
+\newpage
+
+% -------------------------------
+% Appendices
+% -------------------------------
+\appendix
+
+\chapter{Installation and Setup Guide}
+\thispagestyle{contentpages}
+
+\section{System Requirements}
+\begin{itemize}
+    \item \textbf{Operating System:} Linux (Ubuntu/Debian recommended), macOS, or Windows with WSL
+    \item \textbf{Build Tools:} GCC, Make
+    \item \textbf{Parser Generators:} Flex (≥ 2.6), Bison (≥ 3.0)
+    \item \textbf{Python:} 3.6 or higher
+    \item \textbf{Optional:} Streamlit for web interface
+\end{itemize}
+
+\section{Installation Steps}
+\begin{lstlisting}[language=bash, caption=Installation Commands]
+# 1. Install system dependencies (Ubuntu/Debian)
+sudo apt-get update
+sudo apt-get install -y build-essential flex bison python3 python3-pip
+
+# 2. Clone the repository
+git clone https://github.com/Niranjan7771/cfg2yacc.git
+cd cfg2yacc
+
+# 3. Install Python dependencies
+pip3 install -r requirements.txt
+
+# 4. Verify installation
+flex --version
+bison --version
+python3 --version
+
+# 5. Run a sample
+make run DEF_FILE=samples/sample9_calculator/S9_analyzer.def
+\end{lstlisting}
+\newpage
+\section{Quick Start Guide}
+\begin{enumerate}
+    \item Create a \texttt{.def} file with your grammar
+    \item Run \texttt{make run DEF\_FILE=your\_file.def}
+    \item View the colorful parse tree output
+    \item For web interface: \texttt{./run\_ui.sh}
+\end{enumerate}
+
+\section{Command Reference}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{Command} & \textbf{Description} \\
+\hline
+\texttt{make run} & Build and run with terminal visualization \\
+\texttt{make run-simple} & Simple indented tree output \\
+\texttt{make run-compact} & Compact terminals-only view \\
+\texttt{make run-stats} & Show statistics summary \\
+\texttt{make clean} & Clean build artifacts \\
+\texttt{./run\_ui.sh} & Launch web interface \\
+\hline
+\end{tabular}
+\caption{Command Reference}
+\label{tab:commands}
+\end{table}
+
+\chapter{Complete Code Listings}
+\thispagestyle{contentpages}
+
+\section{AST Implementation (ast.c)}
+\begin{lstlisting}[language=C, caption=Complete AST Implementation]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
+#include "ast.h"
+
+Node* create_leaf_node(const char* node_type, const char* value) {
+    Node* node = (Node*)malloc(sizeof(Node));
+    node->node_type = strdup(node_type);
+    node->value = value ? strdup(value) : NULL;
+    node->num_children = 0;
+    node->children = NULL;
+    return node;
+}
+
+Node* create_node(const char* node_type, int num_children, ...) {
+    Node* node = (Node*)malloc(sizeof(Node));
+    node->node_type = strdup(node_type);
+    node->value = NULL;
+    node->num_children = num_children;
+    
+    if (num_children > 0) {
+        node->children = (Node**)malloc(sizeof(Node*) * num_children);
+        va_list args;
+        va_start(args, num_children);
+        for (int i = 0; i < num_children; i++) {
+            node->children[i] = va_arg(args, Node*);
+        }
+        va_end(args);
+    } else {
+        node->children = NULL;
+    }
+    
+    return node;
+}
+
+void print_ast(Node* node, int indent) {
+    if (!node) return;
+    
+    for (int i = 0; i < indent; i++) {
+        printf("  ");
+    }
+    
+    printf("%s", node->node_type);
+    if (node->value) {
+        printf(": %s", node->value);
+    }
+    printf("\n");
+    
+    for (int i = 0; i < node->num_children; i++) {
+        print_ast(node->children[i], indent + 1);
+    }
+}
+
+void free_ast(Node* node) {
+    if (!node) return;
+    
+    free(node->node_type);
+    if (node->value) free(node->value);
+    
+    for (int i = 0; i < node->num_children; i++) {
+        free_ast(node->children[i]);
+    }
+    
+    if (node->children) free(node->children);
+    free(node);
+}
+\end{lstlisting}
+
+\section{Sample Medical Records Analyzer}
+\begin{lstlisting}[caption=Medical Records .def File (Sample 8)]
+# Medical Records Analysis
+%%LEX
+PATIENT_ID      MR[0-9]{6}|AB[0-9]{6}|CD[0-9]{6}
+BLOOD_TYPE      (A|B|AB|O)[+-]
+BLOOD_PRESSURE  [0-9]{2,3}\/[0-9]{2,3}
+TEMPERATURE     [0-9]{2,3}\.[0-9]F|[0-9]{2}\.[0-9]C
+HEART_RATE      [0-9]{2,3}bpm
+DIAGNOSIS_CODE  ICD10-[A-Z][0-9]{2}
+DATE_MEDICAL    [0-9]{2}\/[0-9]{2}\/[0-9]{4}
+TIME_MEDICAL    [0-9]{2}:[0-9]{2}(AM|PM)
+WHITESPACE      [ \t\r]+
+NEWLINE         \n
+
+%%YACC
+document -> record_list
+    { $ = create_node("medical_document", 1, $1); }
+
+record_list -> medical_record
+    { $ = create_node("record_list", 1, $1); }
+    | record_list medical_record
+    { $ = create_node("record_list", 2, $1, $2); }
+
+medical_record -> patient_info vital_signs diagnosis NEWLINE
+    { $ = create_node("medical_record", 4, $1, $2, $3, $4); }
+
+patient_info -> PATIENT_ID BLOOD_TYPE
+    { $ = create_node("patient_info", 2, $1, $2); }
+
+vital_signs -> BLOOD_PRESSURE TEMPERATURE HEART_RATE
+    { $ = create_node("vital_signs", 3, $1, $2, $3); }
+
+diagnosis -> DIAGNOSIS_CODE DATE_MEDICAL TIME_MEDICAL
+    { $ = create_node("diagnosis", 3, $1, $2, $3); }
+\end{lstlisting}
+
+\chapter{User Manual}
+\thispagestyle{contentpages}
+
+\section{Creating a Custom Analyzer}
+
+\subsection{Step 1: Create .def File}
+\begin{lstlisting}[caption=my\_analyzer.def]
+# My Custom Analyzer
+%%LEX
+WORD [a-zA-Z]+
+NUMBER [0-9]+
+WHITESPACE [ \t\r]+
+NEWLINE \n
+
+%%YACC
+document -> item_list
+    { $ = create_node("document", 1, $1); }
+
+item_list -> item
+    { $ = create_node("item_list", 1, $1); }
+    | item_list item
+    { $ = create_node("item_list", 2, $1, $2); }
+
+item -> WORD NEWLINE
+    { $ = create_node("item", 2, $1, $2); }
+    | NUMBER NEWLINE
+    { $ = create_node("item", 2, $1, $2); }
+\end{lstlisting}
+
+\subsection{Step 2: Create Input File}
+\begin{lstlisting}[caption=my\_input.txt]
+hello
+42
+world
+123
+\end{lstlisting}
+
+\subsection{Step 3: Build and Run}
+\begin{lstlisting}[language=bash]
+make run DEF_FILE=my_analyzer.def INPUT_FILE=my_input.txt
+\end{lstlisting}
+
+\end{document}
