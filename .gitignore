@@ -9,7 +9,6 @@ results/
 .idea/
 *.mp4
 *.csv
-report/*.pdf
 report/*.log
 report/*.aux
 report/*.toc

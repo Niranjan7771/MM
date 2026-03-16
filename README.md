@@ -59,7 +59,7 @@ An advanced real-time computer vision system that integrates body pose estimatio
     pip install -r requirements.txt
     ```
 
-##  Usage
+## 🏃 Usage
 
 ### 1. Web Dashboard (Recommended)
 Launch the interactive browser interface:
@@ -77,7 +77,40 @@ python main.py
 *   **T**: Toggle Trails | **G**: Toggle Graphs | **B**: Background Seg
 *   **S**: Snapshot | **R**: Rec CSV | **V**: Rec Video | **Q**: Quit
 
-##  Project Structure
+## 📋 Command Reference
+
+### Environment & Setup
+| Task | Command |
+| :--- | :--- |
+| Create Virtual Env | `python -m venv venv` |
+| Activate Env (Win) | `venv\Scripts\activate` |
+| Activate Env (Unix) | `source venv/bin/activate` |
+| Install Deps | `pip install -r requirements.txt` |
+
+### Development & Execution
+| Task | Command |
+| :--- | :--- |
+| Run Web App | `python app.py` |
+| Run Standalone | `python main.py` |
+| Run API Tests | `python test_api.py` |
+| Run Camera Tests | `python test_camera.py` |
+
+### Documentation (LaTeX)
+| Task | Command |
+| :--- | :--- |
+| **Tex to PDF** | `pdflatex report.tex` |
+| Compile BibTeX | `bibtex report` |
+| Full Recompile | `pdflatex report.tex && bibtex report && pdflatex report.tex && pdflatex report.tex` |
+
+### Git Operations
+| Task | Command |
+| :--- | :--- |
+| Initialize Repo | `git init` |
+| Add All Files | `git add .` |
+| Commit Changes | `git commit -m "Your Message"` |
+| Push to Main | `git push -u origin main` |
+
+## 📂 Project Structure
 
 *   `app.py`: Flask entry point.
 *   `src/core/`: Heavy lifting analysis engines (pose, hands, face, etc.).
